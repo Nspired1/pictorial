@@ -1,0 +1,30 @@
+{
+  "name": "imageupload",
+  "version": "1.0.0",
+  "description": "simple image upload",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "don spire",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.27.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "multer": "^1.4.3",
+    "multer-storage-cloudinary": "^4.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1"
+  }
+}
