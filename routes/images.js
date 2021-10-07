@@ -14,8 +14,10 @@ const upload = multer({ storage });
 router.get("/", auth, async (req, res) => {
   console.log("Get all images");
   try {
-    const images = await Image.find({ user: req.user.id }).sort({ date: -1 });
-    //might need to be sendFile
+    // const images = await Image.find({ user: req.user.id }).sort({ date: -1 });
+    const images = await Image.find({}).sort({ date: -1 });
+
+    // note: images is an array of objects, the objects contain a url to image and filenmae of image
     res.json(images);
   } catch (err) {
     console.error(err.message);
@@ -26,12 +28,26 @@ router.get("/", auth, async (req, res) => {
 // @route   POST api/images/
 // @desc    Add a new image
 // @access  Private
-router.post("/", auth, (req, res) => {
+
+// router.post("/", auth, (req, res) => {
+router.post("/", auth, upload.single("image"), async (req, res) => {
+  console.log("This is the REQ object in image ROUTES");
+  console.log(req);
+  console.log("This is the req FILE in the image ROUTES");
+  console.log(req.file);
   try {
-    const newImage = new Image({
-      user: req.user.id,
+    const image = new Image({
+      url: req.file.path,
+      filename: req.file.filename,
     });
-    console.log("Add an image");
+    image.user = req.user.id;
+
+    await image.save();
+
+    console.log("This is POST route to add an image");
+    console.log("This is the newImage");
+    console.log(image);
+    res.json(image);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error.");
@@ -48,8 +64,14 @@ router.patch("/:id", (req, res) => {
 // @route   DELETE api/images/:id
 // @desc    Delete an image
 // @access  Private
-router.delete("/:id", (req, res) => {
-  res.send("Delete an image");
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const image = await Image.findById(id);
+
+  cloudinary.uploader.destroy(image.filename);
+
+  await Image.findByIdAndDelete(id);
+  res.send({ msg: "Image Deleted." });
 });
 
 module.exports = router;
