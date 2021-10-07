@@ -12,8 +12,8 @@ const ImageUpload = (props) => {
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    if (error === "Please select an image.") {
-      setAlert("Please select an image.", "danger");
+    if (error) {
+      setAlert("Sorry, something went wrong. Please try again later", "danger");
     }
   });
 
@@ -36,17 +36,9 @@ const ImageUpload = (props) => {
     if (!name) {
       setAlert("Please select an image", "danger");
     } else {
-      console.log(description);
-      console.log(file);
-      console.log("This is formData");
-      console.log(formData);
       addImage(formData);
       props.history.push("/");
     }
-    // fetch or axios POST request OR send to Reducer and have ACTION send POST request
-    // in sending a file content-type header should NOT be specified. FILES are NOT JSON.
-    // Browsers will annotate automatically headers
-    // also pass the whole file to the body of the request.
   };
 
   const ImageThumb = ({ image }) => {
