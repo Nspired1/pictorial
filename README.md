@@ -2,7 +2,7 @@
 
 ## :zap: Instagram-like clone, but more of a tutorial of image uploads and images
 
-- Simple full-stack app that shows a list of images from the React client and processed on the Express server. Image filename and filepath are saved in a hosted Mongo Atlas Database, while the images themselves are saved in Cloudinary, a cloud provider for hosting images and video.
+- Simple full-stack app that shows a list of images from the React client and processed on the Express server. Image filename and filepath are saved in a hosted Mongo Atlas Database, while the images themselves are saved in Cloudinary, a cloud provider for hosting images and video. The two main things I learned from this app is how to use React for image upload and image preview.
 
 ## :page_facing_up: Table of Contents
 
@@ -24,6 +24,8 @@
 
 - React is a separate frontend server, which is different than a view engine like EJS, PUG, or JADE. Using a view engine with a backend server simplifies image uploading. However, I wanted to see how to pass the "app state" of images and an authenticated user across the application to different pages. The app was built by searching several tutorials, MDN Docs, and googling Stackoverflow answers.
 
+- Working with images and associated data using React, Context, and Express was more difficult than I initially thought. Some of those issues are captured in the deep dive and pending features. The basic issue is working with React, synthetic events, and images is different than working with HTML forms and images. Many small issues arise due to the difference between a React uncontrolled component (image upload) and React controlled component (user input). Then sending the Form Data which includes the image and associated text through Context to the Express server, manipulating the data, and back to the React UI. Retrieving and manipulating that Form Data didn't work as working with JSON, but it is a learning experience. This is what I have learned so far and my intention is to learn more and update this app in the future.
+
 ## :camera: Screenshots
 
 ![Screenshot1](/screenshots/screenshot1.png)
@@ -44,6 +46,7 @@
 
   NOTE: There were minor issues that were discovered in making this app.
   One example is even if the app is about creating images, don't call a post an image. Confusion arises between the different data fields like description and name of the post that is called image and the image (file) itself.
+  Another issue was the flickering of the image preview while entering description.
   Another example is that if the axios req is structured as:
   `axios.post({ req })` instead of `axios({ method: "post", data...}) ` the file would be included in the http address as if it was sending JSON instead of a data object in form data. The documentation is not clear on the reason (neither in axios, MDN Form Data, Multer, etc), so it would appear to be a setting in a version of one of the libraries. As updates occur to the libraries and npm packages, I will update the app.
 
