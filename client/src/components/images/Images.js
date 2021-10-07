@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, Fragment } from "react";
 import ImageItem from "./ImageItem";
-import Spinner from "../layout/Spinner";
 import ImageContext from "../../context/image/imageContext";
 import AlertContext from "../../context/alert/alertContext";
 
@@ -8,7 +7,7 @@ const Images = () => {
   const imageContext = useContext(ImageContext);
   const alertContext = useContext(AlertContext);
 
-  const { images, getImages, filtered, loading, error } = imageContext;
+  const { images, getImages, error } = imageContext;
   const { setAlert } = alertContext;
 
   useEffect(() => {
@@ -21,11 +20,9 @@ const Images = () => {
 
   return (
     <Fragment>
-      {images !== null && !loading ? (
-        images.map((image) => <ImageItem key={image._id} image={image} />)
-      ) : (
-        <Spinner />
-      )}
+      {images.map((image) => (
+        <ImageItem key={image._id} image={image} />
+      ))}
     </Fragment>
   );
 };
