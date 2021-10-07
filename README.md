@@ -60,8 +60,7 @@
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) for cloud hosted database
 - [Cloudinary](https://cloudinary.com/) for cloud based image storage
 - [Multer](https://www.npmjs.com/package/multer) middleware used for uploading files
-- [Multer Storage Cloudinary](https://www.npmjs.com/package/multer-storage-cloudinary) library that assists  
-   multer in uploading to Cloudinary.
+- [Multer Storage Cloudinary](https://www.npmjs.com/package/multer-storage-cloudinary) library that assists multer in uploading to Cloudinary.
 - [React UI](https://reactjs.org/) for frontend user interface
 - [JSON Web Tokens](https://www.npmjs.com/package/jsonwebtoken) for authentication
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs) for hashing
@@ -84,16 +83,17 @@
 - Image storage, retrieval, and deletion.
 - User login and logout
 - Alerts for invalid user register and login
-- User authorization: only the creator of an image can delete their image.
 - Images are displayed by time in ascending order (most recent first).
 
 ## :clipboard: Pending Features
 
 - Eliminate image flicker when writing the description on image upload form
-- Image upload for user profile image
+- Better handling of asynchronous action from image upload, utilizing a spinner, and redirect/refresh to images list.
+- Enable Edit Image
 - Include profile page
+- Image upload for user profile image
 - UI refactor
-- Enable Reply, repost/retweet, and Likes
+- Enable Likes, Comments, and Replies in Comments
 - Threading for replies
 
 ## :clap: Inspiration
