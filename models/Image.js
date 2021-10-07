@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 const ImageSchema = mongoose.Schema({
   url: String,
   filename: String,
+  title: String,
   description: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "users",
+    ref: "user",
   },
   date: {
     type: Date,

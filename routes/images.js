@@ -31,14 +31,14 @@ router.get("/", auth, async (req, res) => {
 
 // router.post("/", auth, (req, res) => {
 router.post("/", auth, upload.single("image"), async (req, res) => {
-  console.log("This is the REQ object in image ROUTES");
-  console.log(req);
   console.log("This is the req FILE in the image ROUTES");
   console.log(req.file);
   try {
     const image = new Image({
       url: req.file.path,
       filename: req.file.filename,
+      title: req.body.title,
+      description: req.body.description,
     });
     image.user = req.user.id;
 
