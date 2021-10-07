@@ -46,32 +46,59 @@ const Register = (props) => {
     }
   };
   return (
-    <div className="form-container">
-      <h1>Accout Register</h1>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} onChange={onChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" value={email} onChange={onChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-        <input
-          type="submit"
-          value="Register"
-          className="btn btn-primary btn-block"
-        />
-      </form>
+    <div className="form-area">
+      <div className="form-wrapper">
+        <h1>Accout Register</h1>
+        <form onSubmit={onSubmit}>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Name
+            </label>
+            <input
+              required
+              type="text"
+              name="name"
+              className="form-control"
+              value={name}
+              onChange={onChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              required
+              type="email"
+              name="email"
+              className="form-control"
+              value={email}
+              onChange={onChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              required
+              type="password"
+              name="password"
+              className="form-control"
+              value={password}
+              onChange={onChange}
+            />
+            <div className="form-text">
+              Password must be 6 characters or more
+            </div>
+          </div>
+          <div className="d-grid mb-2">
+            <button type="submit" className="btn btn-primary">
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
