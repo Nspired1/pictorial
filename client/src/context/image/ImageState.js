@@ -14,11 +14,12 @@ import {
   // UPDATE_IMAGE,
   FILTER_IMAGES,
   CLEAR_FILTER,
+  UPDATE_IMAGE,
 } from "../types";
 
 const ImageState = (props) => {
   const initialState = {
-    images: null,
+    images: [],
     current: null,
     error: null,
     filtered: null,
@@ -51,7 +52,6 @@ const ImageState = (props) => {
     };
 
     console.log("This is in POST of ImageState in context");
-
     console.log(formData);
     try {
       const res = await axios({
@@ -60,7 +60,7 @@ const ImageState = (props) => {
         data: formData,
         config,
       });
-      console.log("This is RESponse from the server");
+      console.log("This is SERVER RESPONSE");
       console.log(res);
       dispatch({
         type: ADD_IMAGE,
@@ -99,6 +99,17 @@ const ImageState = (props) => {
   };
 
   // Update Image
+  const updateImage = async (image) => {
+    try {
+      const res = await axios.patch(`/api/images/${image._id}`, image);
+      dispatch({ type: UPDATE_IMAGE, payload: res.data });
+    } catch (err) {
+      dispatch({
+        type: IMAGE_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
 
   // Filter Image
   const filterImages = (text) => {
@@ -123,6 +134,7 @@ const ImageState = (props) => {
         clearCurrent,
         filterImages,
         clearFilter,
+        updateImage,
       }}
     >
       {props.children}

@@ -11,7 +11,7 @@ const upload = multer({ storage });
 // @route   GET api/images
 // @desc    Get all users images
 // @access  Private
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   console.log("Get all images");
   try {
     // const images = await Image.find({ user: req.user.id }).sort({ date: -1 });
@@ -57,8 +57,25 @@ router.post("/", auth, upload.single("image"), async (req, res) => {
 // @route   PATCH api/images/:id
 // @desc    Update an image
 // @access  Private
-router.patch("/:id", (req, res) => {
-  res.send("Update an image");
+router.patch("/:id", auth, async (req, res) => {
+  const { description } = req.body;
+  try {
+    let image = await Image.findById(req.params.id);
+
+    if (!image) return res.status(404).json({ msg: "Image not found" });
+
+    if (image.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "Not authorized." });
+    }
+
+    updatedImage = await Image.findByIdAndUpdate(req.params.id, {
+      $set: description,
+    });
+    res.json(updatedImage);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error.");
+  }
 });
 
 // @route   DELETE api/images/:id

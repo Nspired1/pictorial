@@ -6,7 +6,7 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   //   UPDATE_CURRENT,
-  //   UPDATE_IMAGE,
+  UPDATE_IMAGE,
   FILTER_IMAGES,
   CLEAR_FILTER,
 } from "../types";
@@ -21,12 +21,20 @@ export default (state, action) => {
         images: action.payload,
         loading: false,
       };
-    // ADD_IMAGE has action, then state to add image at the front of the array
+    // ADD_IMAGE has action in front of state to add image at the front of the array
     case ADD_IMAGE:
       return {
         ...state,
         images: [action.payload, ...state.images],
         loading: true,
+      };
+    case UPDATE_IMAGE:
+      return {
+        ...state,
+        images: state.images.map((image) =>
+          image._id === action.payload._id ? action.payload : image
+        ),
+        loading: false,
       };
     case DELETE_IMAGE:
       return {
@@ -54,7 +62,7 @@ export default (state, action) => {
         ...state,
         filtered: state.images.filter((image) => {
           const regex = new RegExp(`${action.payload}`, "gi");
-          return image.filename.match(regex);
+          return image.description.match(regex);
         }),
       };
     case CLEAR_FILTER:
