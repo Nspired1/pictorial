@@ -1,38 +1,52 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import ImageContext from "../../context/image/imageContext";
 
 const ImageItem = ({ image }) => {
   const imageContext = useContext(ImageContext);
-  const { deleteImage, setCurrent, clearCurrent } = imageContext;
+  const history = useHistory();
 
+  const { deleteImage, clearCurrent } = imageContext;
   const { _id } = image;
 
+  //pending on getting Edit component operational
+  // const routeChange = () => {
+  //   let path = "/edit";
+  //   history.push(path);
+  // };
+
   const onDelete = () => {
-    console.log("This is image id in ImageItem for onDelete");
-    console.log(_id);
     deleteImage(_id);
     clearCurrent();
   };
 
   return (
-    <div className="card bg-light">
-      <h3>Image Item</h3>
-      <h3>{image.filename}</h3>
+    <div className="card bg-light" style={{ maxWidth: "500px" }}>
       <img src={image.url} alt={image.name} />
-      <button
-        type="button"
-        className="btn btn-warning btn-lg btn-block mb-3 mt-3"
-        onClick={() => setCurrent(image)}
-      >
-        Edit
-      </button>
-      <button
-        type="button"
-        className="btn btn-danger btn-lg btn-block mb-3"
-        onClick={onDelete}
-      >
-        Delete
-      </button>
+      <div className="card-body">
+        <p className="card-text">{image.description}</p>
+        {/* <button
+          type="button"
+          className="btn btn-warning btn-lg"
+          onClick={routeChange}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          className="btn btn-success btn-lg"
+          style={{ position: "relative", left: 10 }}
+        >
+          Like
+        </button> */}
+        <button
+          type="button"
+          className="btn btn-danger btn-lg "
+          onClick={onDelete}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
