@@ -74,9 +74,9 @@
 
 ## :floppy_disk: Setup
 
-- Normally, the setup would be to clone this repo, change directory into it, then type `npm install` and `npm client-install`, however because of the environment variables for Cloudinary, Mongo Atlas, JWT secret, etc, etc,. and the associated setup with those services the easiest method is click on the link to the Heroku site either [here](https://blooming-reef-68471.herokuapp.com/) or below:
+- Normally, the setup would be to clone this repo, change directory into it, then type `npm install` and `npm client-install`. Because of the services and environment variables for JWT secret, Cloudinary, Mongo Atlas, etc. you would need to open your own account, set up those services, and set your own secrets and environment variables. The environment variables that need to be set are MONGO_ATLAS_SECRET, JWT_SECRET, CLOUDINARY_CLOUD_NAME, CLOUDINARY_KEY, and CLOUDINARY_SECRET.
 
-link: [https://blooming-reef-68471.herokuapp.com/](https://blooming-reef-68471.herokuapp.com/)
+- After the addition of new features and resolving some Update issues, this will be deployed on Heroku. When that happens, links to the app will be made available.
 
 ## :sunglasses: Features
 
