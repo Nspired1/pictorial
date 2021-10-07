@@ -7,12 +7,11 @@ import AuthContext from "../../context/auth/authContext";
 
 const WithPrivacy = ({ component: Component, ...rest }) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, loading } = authContext;
+  const { isAuthenticated } = authContext;
   return (
     <Route
       {...rest}
       render={(props) =>
-        // !isAuthenticated && !loading ? (
         !isAuthenticated ? <Redirect to="/login" /> : <Component {...props} />
       }
     />
