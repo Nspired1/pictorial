@@ -1,6 +1,13 @@
 import React, { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSignOutAlt,
+  faImage,
+  faUser,
+  faCameraRetro,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
@@ -13,15 +20,22 @@ const Navbar = () => {
 
   const authLinks = (
     <Fragment>
-      <li>Hello {user && user.name} </li>
-      <li>
-        <Link to="/profile">Profile Page</Link>
+      <li className="nav-link">Hello {user && user.name} </li>
+      <li className="nav-item">
+        <Link to="/profile" className="nav-link">
+          <FontAwesomeIcon icon={faUser} />
+          Profile Page
+        </Link>
       </li>
-      <li>
-        <Link to="/upload">Upload Image</Link>
+      <li className="nav-item">
+        <Link to="/upload" className="nav-link">
+          <FontAwesomeIcon icon={faImage} />
+          Upload Image
+        </Link>
       </li>
-      <li>
-        <a onClick={onLogout} href="#!">
+      <li className="nav-item">
+        <a onClick={onLogout} href="#!" className="nav-link">
+          <FontAwesomeIcon icon={faSignOutAlt} />
           <span className="hide-sm">Logout</span>
         </a>
       </li>
@@ -30,27 +44,54 @@ const Navbar = () => {
 
   const guestLinks = (
     <Fragment>
-      <li>
-        <Link to="/register">Register</Link>
+      <li className="nav-item">
+        <Link to="/register" className="nav-link">
+          Register
+        </Link>
       </li>
-      <li>
-        <Link to="/login">Login</Link>
+      <li className="nav-item">
+        <Link to="/login" className="nav-link">
+          Sign In
+        </Link>
       </li>
     </Fragment>
   );
 
   return (
     <div>
-      <h1>This is the main App</h1>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        {isAuthenticated ? authLinks : guestLinks}
-      </ul>
+      <nav className="navbar navbar-expand-lg navbar-light ">
+        <div className="container-fluid">
+          <Link to="/" className="navbar-brand">
+            <FontAwesomeIcon icon={faCameraRetro} /> Pictorial
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"> </span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/" className="nav-link active" aria-current="page">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/about" className="nav-link">
+                  About
+                </Link>
+              </li>
+              {isAuthenticated ? authLinks : guestLinks}
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 };
