@@ -20,15 +20,17 @@
 
 ## :books: General Info
 
-- A simple Instagram-like clone using React for the frontend client, Express node.js for the backend server, using MongoDB Atlas as the cloud hosted database, and Cloudinary for the cloud based image hosting. This was built to better understand image upload with React. I say Instagram-like because it's the closest analogy. This is more for getting practical application of image/file uploading using React and React hooks.
+- A simple Instagram-like clone using React for the frontend client, Express node.js for the backend server, using MongoDB Atlas as the cloud hosted database, and Cloudinary for the cloud based image hosting. This was built to better understand image upload with React. I say Instagram-like because it's the most widely know image app, though Flickr or 500px would be similar image applications. This is more for getting practical application of image/file uploading using React and React hooks.
 
 - React is a separate frontend server, which is different than a view engine like EJS, PUG, or JADE. Using a view engine with a backend server simplifies image uploading. However, I wanted to see how to pass the "app state" of images and an authenticated user across the application to different pages. The app was built by searching several tutorials, MDN Docs, and googling Stackoverflow answers.
 
 ## :camera: Screenshots
 
-![Screenshot1](/screenshots/)
+![Screenshot1](/screenshots/screenshot1.png)
 
-![Screenshot2](/screenshots/)
+![Screenshot2](/screenshots/screenshot2.png)
+
+![Screenshot2](/screenshots/screenshot3.png)
 
 ## :microscope: Deep Dive
 
@@ -36,16 +38,17 @@
   `const changeHandler = (e) => {`
   ` setFile(e.target.files[0]);`
   ` };`
-  Note that you cannot use the same onChange function for files AND user inputs. The reason is that user inputs are controlled inputs, meaing React controls them. File inputs are UNCONTROLLED COMPONENTS, meaning that the DOM controls file inputs. If the same onChange function is used, React will throw an error saying that both controlled and uncontrolled inputs cannot be in the same form.
+  Note that you cannot use the same onChange function for files AND user inputs. The reason is that user inputs are controlled inputs, meaing React controls them. File inputs are UNCONTROLLED COMPONENTS, meaning that the DOM controls the inputs. If the same onChange function is used, React will throw an error saying that both controlled and uncontrolled inputs cannot be in the same form.
 
   The file attached to a FormData object and is sent via an onSubmit function. Working with the files and the FormData object can be tricky, since you can't attach or call a property in the object. FormData requires methods to get and set data: get(), append(), set(), etc., to access key value pairs. This can cause confusion since the usual pattern is to call the desired property.
 
-  NOTE: There were minor issues that either did or did not happen based on previous responses on Stack Overflow. One example is that sometimes Babel wouldn't recognize some of the conditional statements within the React components and throw an error. That was usually solved usually by an update. Or by configuring the .babelrc file.
+  NOTE: There were minor issues that were discovered in making this app.
+  One example is even if the app is about creating images, don't call a post an image. Confusion arises between the different data fields like description and name of the post that is called image and the image (file) itself.
   Another example is that if the axios req is structured as:
   `axios.post({ req })` instead of `axios({ method: "post", data...}) ` the file would be included in the http address as if it was sending JSON instead of a data object in form data. The documentation is not clear on the reason (neither in axios, MDN Form Data, Multer, etc), so it would appear to be a setting in a version of one of the libraries. As updates occur to the libraries and npm packages, I will update the app.
 
   - Multer. The Multer middleware attaches a file object to the request object. Working in conjunction with Multer Cloudinary Storage, the request object is the filename and file path to the image in Cloudinary.
-    Also note that Multer is synchronous and doesn't support Promises or asynchronous actions. So, that needs to kept in mind when writing the upload.
+    Also note that Multer is synchronous and doesn't support Promises or asynchronous actions. So, that needs to kept in mind when writing the middleware in the routes.
 
 ## :computer: Technologies
 
@@ -83,7 +86,9 @@ link: [https://blooming-reef-68471.herokuapp.com/](https://blooming-reef-68471.h
 
 ## :clipboard: Pending Features
 
+- Eliminate image flicker when writing the description on image upload form
 - Image upload for user profile image
+- Include profile page
 - UI refactor
 - Enable Reply, repost/retweet, and Likes
 - Threading for replies
