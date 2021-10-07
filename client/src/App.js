@@ -12,6 +12,7 @@ import About from "./components/pages/About";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import UploadImage from "./components/images/UploadImage";
+import EditImage from "./components/images/EditImage";
 import UserProfile from "./components/pages/UserProfile";
 import Alerts from "./components/layout/Alerts";
 import setAuthToken from "./utils/setAuthToken";
@@ -34,7 +35,8 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route exact path="/about" component={About} />
-                  <Route exact path="/upload" component={UploadImage} />
+                  <WithPrivacy exact path="/upload" component={UploadImage} />
+                  <WithPrivacy exact path="/edit" component={EditImage} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                   <WithPrivacy exact path="/profile" component={UserProfile} />
