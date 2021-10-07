@@ -26,7 +26,7 @@ const ImageFilter = () => {
       <input
         ref={text}
         type="text"
-        placeholder="Search Pictures"
+        placeholder="Search Pictures..."
         onChange={onChange}
       />
     </form>
