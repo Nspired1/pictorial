@@ -10,7 +10,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "calparks",
+    folder: "pictorial",
     allowedFormats: ["jpeg", "jpg", "png"],
   },
 });
